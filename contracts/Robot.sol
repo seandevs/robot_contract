@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
 
-contract Robot is ERC721Enumerable, Ownable {
+contract Robot is ERC721, ERC721Enumerable, Pausable, Ownable {
 
     uint256 private _saleTime = 1634451621; // 7PM EDT on November 1st
     uint256 private _price = 8 * 10**16; // .08 eth
@@ -14,6 +16,14 @@ contract Robot is ERC721Enumerable, Ownable {
 
     constructor(string memory baseURI) ERC721("Robot", "RBT") {
         setBaseURI(baseURI);
+    }
+
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
     }
 
     function setSaleTime(uint256 time) public onlyOwner {
@@ -36,8 +46,26 @@ contract Robot is ERC721Enumerable, Ownable {
         return _baseTokenURI;
     }
 
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
+        internal
+        whenNotPaused
+        override(ERC721, ERC721Enumerable)
+    {
+        super._beforeTokenTransfer(from, to, tokenId);
+    }
+
+   // The following function override required by Solidity.
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721Enumerable)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+
     // Count is how many they want to mint
-    function mint(uint256 _count) public payable {
+    function mint(uint256 _count) public whenNotPaused payable {
         uint256 totalSupply = totalSupply();
         require(_count < 21, "Exceeds the max token per transaction limit.");
         require(
