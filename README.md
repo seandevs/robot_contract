@@ -12,31 +12,49 @@ Start Truffle Console.
 $ truffle console --network development
 ```
 
-Deploy a contract.
+Deploy contracts.
 ```
 $ truffle migrate --reset
 ```
 
+#### Robot Contract
+This is the ERC721 contract to mint Robot NFTs.  
+
 Instantiate contract in console.
 ```
-$ contract = await Robot.deployed()
+$ robot = await Robot.deployed()
 ```
 
 Mint a Token in Truffle.
 ```
-$ contract.mint(1, {from:accounts[1], value: 100000000000000000, gas: 4712388})
+$ robot.mint(1, {from:accounts[1], value: 100000000000000000, gas: 4712388})
 ```
 
 Show the ID of the first token minted from above.
 ```
-$ contract.walletOfOwner(accounts[1]).then(function(bn) { thisToken = bn})
+$ robot.walletOfOwner(accounts[1]).then(function(bn) { thisToken = bn})
 $ thisToken[0].words[0]
 ```
 
 Get TokenURI
 ```
-$ contract.tokenURI(0)
+$ robot.tokenURI(0)
 ```
 
+#### Accessory Contract
+This is the ERC1155 contract to mint Robot accessories as FTs.  
 
+Instantiate contract in console.
+```
+$ acc = await Robot.deployed()
+```
 
+Mint a Token in Truffle.
+```
+$ acc.mintAccessory(accounts[1], 2, "0x000", {from: accounts[0], gas: 4712388})
+```
+
+Get account balance per tokenID
+```
+$ acc.balanceOf(accounts[1], 2)
+```
