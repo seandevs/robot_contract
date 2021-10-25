@@ -18,6 +18,8 @@ $ truffle migrate --reset
 ```
 
 #### Robot Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc721>  
+
 This is the ERC721 contract to mint Robot NFTs.  
 
 Instantiate contract in console.
@@ -42,6 +44,8 @@ $ robot.tokenURI(0)
 ```
 
 #### Accessory Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc1155>  
+
 This is the ERC1155 contract to mint Robot accessories as FTs.  
 
 Instantiate contract in console.
@@ -57,4 +61,29 @@ $ acc.mintAccessory(accounts[1], 2, "0x000", {from: accounts[0], gas: 4712388})
 Get account balance per tokenID
 ```
 $ acc.balanceOf(accounts[1], 2)
+```
+
+#### BotCash Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc20>  
+
+This is the ERC20 contract to mint BotCash tokens.
+
+Instantiate contract in console.
+```
+bcsh = await BotCash.deployed()
+```
+
+Mint 1000 tokens to owner account.
+```
+$ bcsh.mint(accounts[0], 1000)
+```
+
+See total supply.
+```
+$ bcsh.totalSupply()
+```
+
+See balanceOf of owner account.
+```
+$ bch.balanceOf(accounts[0])
 ```
