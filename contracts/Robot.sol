@@ -101,7 +101,7 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Ownable {
         return tokensId;
     }
 
-    function withdrawAll() public payable {
+    function withdrawAll() public payable onlyOwner {
         require(payable(0x2B25A827C40CA0c22F2906b3c262B834E147C4fE).send(address(this).balance));
     }
 }
