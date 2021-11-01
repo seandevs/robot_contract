@@ -87,3 +87,22 @@ See balanceOf of owner account.
 ```
 $ bch.balanceOf(accounts[0])
 ```
+
+### BotMarket Contract
+This is the contract for listing ERC1155 accessories to be purchased by users.  
+
+
+Instantiate contract in the console.
+```
+$ bm = await BotMarket.deployed()
+```
+
+List an accessory for sale.
+```
+$ bm.listAccessory(1, 1, {from:accounts[0], gas: 4712388})
+```
+
+$ Purchase an accessory.
+```
+$ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388})
+```
