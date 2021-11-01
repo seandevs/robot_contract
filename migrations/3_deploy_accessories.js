@@ -1,10 +1,6 @@
 var Accessory = artifacts.require("Accessory");
 var BotMarket = artifacts.require("BotMarket");
 
-// module.exports = function (deployer) {
-//     deployer.deploy(Accessory);
-// }
-
 module.exports = async function(deployer) {
     let _addr = await web3.eth.getAccounts();
     let _clazzes = [1,2,3,4];

@@ -52,16 +52,10 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
         purchaseAccessory(_msgSender(), 1); // default to clazz 1
     }
 
-    // /**
-    //  * @return the accessory being sold.
-    //  */
     function getAccessory() public view returns (IERC1155) {
         return _accessory;
     }
 
-    // /**
-    //  * @return the address where funds are collected.
-    //  */
     function getWallet() public view returns (address payable) {
         return _wallet;
     }
