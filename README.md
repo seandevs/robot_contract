@@ -106,3 +106,8 @@ $ Purchase an accessory.
 ```
 $ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388})
 ```
+
+$ Set (or change) accessory price.
+```
+$ bm.setAccessoryPrice(1, 3, {from:accounts[0], gas: 4712388})
+```

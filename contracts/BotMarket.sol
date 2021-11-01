@@ -104,22 +104,22 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
     function listAccessory(uint256 clazz, uint256 price) public whenNotPaused onlyOwner {
         require(price > 0, "Price of accessory must be greater than 0");
-        _setClazzPrice(clazz, price);
-        _setAccessoryForSale(clazz, true);
+        setAccessoryPrice(clazz, price);
+        setAccessoryForSale(clazz, true);
 
         emit AccessoryListed(clazz, price);
     }
 
     function delistAccessory(uint256 clazz) public whenNotPaused onlyOwner {
-        _setAccessoryForSale(clazz, false);
+        setAccessoryForSale(clazz, false);
     }
 
-    function _setAccessoryForSale(uint256 clazz, bool isForSale) internal {
+    function setAccessoryForSale(uint256 clazz, bool isForSale) public whenNotPaused onlyOwner {
         require(accessories[clazz].price > 0, "Price of accessory must be greater than 0");
         accessories[clazz].isForSale = isForSale;
     }
 
-    function _setClazzPrice(uint256 clazz, uint256 price) internal {
+    function setAccessoryPrice(uint256 clazz, uint256 price) public whenNotPaused onlyOwner {
         accessories[clazz].price = price;
     }
 }
