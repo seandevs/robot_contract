@@ -45,6 +45,12 @@ contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
         _mintBatch(msg.sender, _ids, _amounts, _data);
     }
 
+    function getWalletAccessories(address wallet, uint256[] calldata ids) public view whenNotPaused returns (uint256[] memory) {
+        address[] memory wal = new address[](1);
+        wal[0] = wallet;
+        return balanceOfBatch(wal, ids);
+    }
+
     function _beforeTokenTransfer(address operator, address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) internal whenNotPaused override {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
