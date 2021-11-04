@@ -18,6 +18,8 @@ $ truffle migrate --reset
 ```
 
 #### Robot Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc721>  
+
 This is the ERC721 contract to mint Robot NFTs.  
 
 Instantiate contract in console.
@@ -42,6 +44,8 @@ $ robot.tokenURI(0)
 ```
 
 #### Accessory Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc1155>  
+
 This is the ERC1155 contract to mint Robot accessories as FTs.  
 
 Instantiate contract in console.
@@ -57,4 +61,63 @@ $ acc.mintAccessory(accounts[1], 2, "0x000", {from: accounts[0], gas: 4712388})
 Get account balance per tokenID
 ```
 $ acc.balanceOf(accounts[1], 2)
+```
+
+Get balance of each token
+```
+$ acc.getWalletAccessories(accounts[1], [0,1,2,3])
+```
+
+#### BotCash Contract
+<https://docs.openzeppelin.com/contracts/4.x/api/token/erc20>  
+
+This is the ERC20 contract to mint BotCash tokens.
+
+Instantiate contract in console.
+```
+bcsh = await BotCash.deployed()
+```
+
+Mint 1000 tokens to owner account.
+```
+$ bcsh.mint(accounts[0], 1000)
+```
+
+See total supply.
+```
+$ bcsh.totalSupply()
+```
+
+See balanceOf of owner account.
+```
+$ bch.balanceOf(accounts[0])
+```
+
+### BotMarket Contract
+This is the contract for listing ERC1155 accessories to be purchased by users.  
+
+
+Instantiate contract in the console.
+```
+$ bm = await BotMarket.deployed()
+```
+
+List an accessory for sale.
+```
+$ bm.listAccessory(1, 1, {from:accounts[0], gas: 4712388})
+```
+
+$ Purchase an accessory.
+```
+$ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388})
+```
+
+$ Set (or change) accessory price.
+```
+$ bm.setAccessoryPrice(1, 3, {from:accounts[0], gas: 4712388})
+```
+
+$ Get get accessory by ID
+```
+$ bm.accessories(1)
 ```
