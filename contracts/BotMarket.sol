@@ -20,7 +20,7 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
     // Address where funds are collected
     address payable private _wallet;
 
-    mapping(uint256 => Accessory) private accessories;
+    mapping(uint256 => Accessory) public accessories;
 
     struct Accessory {
         bool isForSale;

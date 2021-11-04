@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "./Whitelist.sol";
 
@@ -22,8 +21,12 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
     // Address where funds are collected
     address payable private _wallet;
 
-    // The robot accessory contract
-    IERC1155 private _accessory;
+    string[] private robotName = ["Robot1", "Robot2", "Robot3", "Robot4"];
+    string[] private robotType = ["Tank", "Speedy", "Defender", "Retired"];
+    uint256[] private strength = [20, 10, 10, 20];
+    uint256[] private agility = [10, 20, 10, 20];
+    uint256[] private ai = [10, 20, 20, 10];
+    uint256[] private defense = [20, 10, 20, 10];
 
     mapping(uint256 => RobotAttributes) public robots;
 
@@ -41,6 +44,13 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         uint256 wins;
         uint256 losses;
         State state;
+        string robotName;
+        string robotType;
+        uint256 health;
+        uint256 strength;
+        uint256 agility;
+        uint256 ai;
+        uint256 defense;
     }
 
     constructor(string memory baseURI, address payable wallet) ERC721("Robot", "RBT") {
@@ -94,22 +104,29 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         return super.supportsInterface(interfaceId);
     }
 
-    function _createRobot(uint256 index) internal {
+    function _createRobot(uint256 index, uint256 typeIndex) internal {
         robots[index] = RobotAttributes({
             robotIndex: index,
             imageURI: " ",
             wins: 0,
             losses: 0,
-            state: defaultState
+            state: defaultState,
+            robotName: robotName[typeIndex],
+            robotType: robotType[typeIndex],
+            health: 1000,
+            strength: strength[typeIndex],
+            agility: agility[typeIndex],
+            ai: ai[typeIndex],
+            defense: defense[typeIndex]
         });
     }
 
     // Count is how many they want to mint
-    function mint(uint256 _count) public whenNotPaused payable {
+    function mint(uint256 botType) public whenNotPaused payable {
         uint256 totalSupply = totalSupply();
-        require(_count < 21, "Exceeds the max token per transaction limit.");
+        require(botType < 4, "There is no robot of that type");
         require(
-            msg.value >= _price * _count,
+            msg.value >= _price || owner() == _msgSender(),
             "The value submitted with this transaction is too low."
         );
         require(
@@ -117,11 +134,9 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
             "The robot sale is not currently open."
         );
 
-        for (uint256 i; i < _count; i++) {
-            uint256 index = totalSupply + i;
-            _createRobot(index);
-            _safeMint(msg.sender, index);
-        }
+        uint256 index = totalSupply + 1;
+        _createRobot(index, botType);
+        _safeMint(msg.sender, index);
     }
 
     function updateRobotsRecords(uint256 winningRobotIndex, uint256 losingRobotIndex) public whenNotPaused onlyWhitelisted {
