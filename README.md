@@ -63,6 +63,11 @@ Get account balance per tokenID
 $ acc.balanceOf(accounts[1], 2)
 ```
 
+Get balance of each token
+```
+$ acc.getWalletAccessories(accounts[1], [0,1,2,3])
+```
+
 #### BotCash Contract
 <https://docs.openzeppelin.com/contracts/4.x/api/token/erc20>  
 
@@ -110,4 +115,9 @@ $ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388
 $ Set (or change) accessory price.
 ```
 $ bm.setAccessoryPrice(1, 3, {from:accounts[0], gas: 4712388})
+```
+
+$ Get get accessory by ID
+```
+$ bm.accessories(1)
 ```
