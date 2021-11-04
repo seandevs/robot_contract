@@ -10,10 +10,10 @@ import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
     uint256 private SALETIME = 1634451621; // 7PM EDT on November 1st
     uint256 private PRICE = .08 ether; // .08 eth
-    uint256 public constant CLASS_LAZER = 1;
+    uint256 public constant CLASS_BUZZSAW = 1;
     uint256 public constant CLASS_SWORD = 2;
-    uint256 public constant CLASS_SAW = 3;
-    uint256 public constant CLASS_WRENCH = 4;
+    uint256 public constant CLASS_SHIELD = 3;
+    uint256 public constant CLASS_AI_CHIP = 4;
 
 
     constructor(uint256[] memory _clazzes, uint256[] memory _amounts) ERC1155("https://gateway.pinata.cloud/ipfs/Qmf8pKSC5mV6nTVSR3shJQp9e7CgVrNqKG98ZCKuMmPBPm/metadata/api/item/{id}.json") {
@@ -33,7 +33,7 @@ contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
     }
 
     function mintAccessory(uint256 _clazz, bytes memory _data) public whenNotPaused onlyOwner {
-        require(_clazz > 0 &&  _clazz <= 4, "Accessory does not exist.");
+        require(_clazz <= 4, "Accessory does not exist.");
         _mint(msg.sender, _clazz, 1, _data);
     }
 

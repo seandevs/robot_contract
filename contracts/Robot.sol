@@ -123,7 +123,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     // Count is how many they want to mint
     function mint(uint256 botType) public whenNotPaused payable {
-        uint256 totalSupply = totalSupply();
         require(botType < 4, "There is no robot of that type");
         require(
             msg.value >= _price || owner() == _msgSender(),
@@ -134,6 +133,7 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
             "The robot sale is not currently open."
         );
 
+        uint256 totalSupply = totalSupply();
         uint256 index = totalSupply + 1;
         _createRobot(index, botType);
         _safeMint(msg.sender, index);
