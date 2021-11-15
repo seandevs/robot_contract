@@ -144,6 +144,10 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         robots[losingRobotIndex].losses += 1;
     }
 
+    function updateRobotName(uint256 robotIndex, string memory value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].robotName = value;
+    }
+
     function updateRobotHealth(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
         robots[robotIndex].health = value;
     }
