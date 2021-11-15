@@ -14,8 +14,8 @@ contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
 
 
     constructor(uint256[] memory _clazzes, uint256[] memory _amounts, string memory uri) ERC1155("") {
-        mintBatchAccessories(_clazzes, _amounts, "0x000");
         _setURI(uri);
+        mintBatchAccessories(_clazzes, _amounts, "0x000");
     }
 
     function setURI(string memory newuri) public onlyOwner {
