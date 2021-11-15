@@ -41,9 +41,6 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
     // /**
     //  * @dev fallback function ***DO NOT OVERRIDE***
-    //  * Note that other contracts will transfer funds with a base gas stipend
-    //  * of 2300, which is not enough to call purchaseAccessory. Consider calling
-    //  * purchaseAccessory directly when purchasing accessories from a contract.
     //  */
     receive () external payable {
         purchaseAccessory(_msgSender(), 1); // default to clazz 1
@@ -66,8 +63,6 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
         _processPurchase(beneficiary, clazz);
         emit AccessoryPurchased(_msgSender(), beneficiary, price);
-
-        _forwardFunds(price, payment);
     }
 
     function _preValidatePurchase(address beneficiary, uint256 payment, uint256 price, bool isForSale) internal view virtual {
@@ -83,14 +78,6 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
     function _processPurchase(address beneficiary, uint256 clazz) internal virtual {
         _deliverAccessory(beneficiary, clazz);
-    }
-
-    function _forwardFunds(uint256 price, uint256 payment) internal virtual {
-        _wallet.transfer(price);
-        if(payment > price) {
-            address payable buyerAddressPayable = payable(msg.sender); // We need to make this conversion to be able to use transfer() function to transfer ethers
-            buyerAddressPayable.transfer(payment - price);
-        }
     }
 
     function listAccessory(uint256 clazz, uint256 price) public whenNotPaused onlyOwner {
@@ -112,5 +99,9 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
     function setAccessoryPrice(uint256 clazz, uint256 price) public whenNotPaused onlyOwner {
         accessories[clazz].price = price;
+    }
+
+    function withdrawAll() public payable onlyOwner {
+        require(_wallet.send(address(this).balance));
     }
 }

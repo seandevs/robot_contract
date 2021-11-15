@@ -13,7 +13,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     using SafeMath for uint256;
 
-    uint256 private _saleTime = 1634451621; // 7PM EDT on November 1st
     uint256 private _price = 8 * 10**16; // .08 eth
 
     string private _baseTokenURI;
@@ -66,18 +65,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         _unpause();
     }
 
-    function setSaleTime(uint256 time) public onlyOwner {
-        _saleTime = time;
-    }
-
-    function getSaleTime() public view returns (uint256) {
-        return _saleTime;
-    }
-
-    function isSaleOpen() public view returns (bool) {
-        return block.timestamp >= _saleTime;
-    }
-
     function setBaseURI(string memory baseURI) public onlyOwner {
         _baseTokenURI = baseURI;
     }
@@ -128,10 +115,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
             msg.value >= _price || owner() == _msgSender(),
             "The value submitted with this transaction is too low."
         );
-        require(
-            block.timestamp >= _saleTime,
-            "The robot sale is not currently open."
-        );
 
         uint256 totalSupply = totalSupply();
         uint256 index = totalSupply + 1;
@@ -142,6 +125,30 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
     function updateRobotsRecords(uint256 winningRobotIndex, uint256 losingRobotIndex) public whenNotPaused onlyWhitelisted {
         robots[winningRobotIndex].wins += 1;
         robots[losingRobotIndex].losses += 1;
+    }
+
+    function updateRobotName(uint256 robotIndex, string memory value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].robotName = value;
+    }
+
+    function updateRobotHealth(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].health = value;
+    }
+
+    function updateRobotStrength(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].strength = value;
+    }
+
+    function updateRobotAgility(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].agility = value;
+    }
+
+    function updateRobotAi(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].ai = value;
+    }
+
+    function updateRobotDefense(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].defense = value;
     }
 
     function setRobotAsFighter(uint256 robotIndex) public whenNotPaused onlyOwner {
