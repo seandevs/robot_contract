@@ -5,19 +5,17 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
-// import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
-    uint256 private SALETIME = 1634451621; // 7PM EDT on November 1st
-    uint256 private PRICE = .08 ether; // .08 eth
     uint256 public constant CLASS_BUZZSAW = 1;
     uint256 public constant CLASS_SWORD = 2;
     uint256 public constant CLASS_SHIELD = 3;
     uint256 public constant CLASS_AI_CHIP = 4;
 
 
-    constructor(uint256[] memory _clazzes, uint256[] memory _amounts) ERC1155("https://gateway.pinata.cloud/ipfs/Qmf8pKSC5mV6nTVSR3shJQp9e7CgVrNqKG98ZCKuMmPBPm/metadata/api/item/{id}.json") {
+    constructor(uint256[] memory _clazzes, uint256[] memory _amounts, string memory uri) ERC1155("") {
         mintBatchAccessories(_clazzes, _amounts, "0x000");
+        _setURI(uri);
     }
 
     function setURI(string memory newuri) public onlyOwner {

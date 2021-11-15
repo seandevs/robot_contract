@@ -13,7 +13,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     using SafeMath for uint256;
 
-    uint256 private _saleTime = 1634451621; // 7PM EDT on November 1st
     uint256 private _price = 8 * 10**16; // .08 eth
 
     string private _baseTokenURI;
@@ -66,18 +65,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         _unpause();
     }
 
-    function setSaleTime(uint256 time) public onlyOwner {
-        _saleTime = time;
-    }
-
-    function getSaleTime() public view returns (uint256) {
-        return _saleTime;
-    }
-
-    function isSaleOpen() public view returns (bool) {
-        return block.timestamp >= _saleTime;
-    }
-
     function setBaseURI(string memory baseURI) public onlyOwner {
         _baseTokenURI = baseURI;
     }
@@ -127,10 +114,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         require(
             msg.value >= _price || owner() == _msgSender(),
             "The value submitted with this transaction is too low."
-        );
-        require(
-            block.timestamp >= _saleTime,
-            "The robot sale is not currently open."
         );
 
         uint256 totalSupply = totalSupply();
