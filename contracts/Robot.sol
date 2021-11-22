@@ -13,7 +13,7 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     using SafeMath for uint256;
 
-    uint256 private _price = 8 * 10**16; // .08 eth
+    uint256 public ROBOT_PRICE = 1 * 10**18;
 
     string private _baseTokenURI;
 
@@ -112,7 +112,7 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
     function mint(uint256 botType) public whenNotPaused payable {
         require(botType < 4, "There is no robot of that type");
         require(
-            msg.value >= _price || owner() == _msgSender(),
+            msg.value >= ROBOT_PRICE || owner() == _msgSender(),
             "The value submitted with this transaction is too low."
         );
 

@@ -21762,6 +21762,102 @@
     "version": "0.8.2+commit.661d1103.Emscripten.clang"
   },
   "networks": {
+    "44787": {
+      "events": {
+        "0x8b150673121b01316e8e9f04c655dcb53717f3ea8192a7606efea46850852934": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "clazz",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            }
+          ],
+          "name": "AccessoryListed",
+          "type": "event"
+        },
+        "0xe0cc08cd6445055fb96ba62706d6598dd171f8a45e41f20be587f05446c95829": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "purchaser",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "AccessoryPurchased",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Paused",
+          "type": "event"
+        },
+        "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Unpaused",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xEe9425eea1544a06eEb88740D2816fB3106Cf97a",
+      "transactionHash": "0x0d8613ef42cbd86691d131e1bebf97c0865e4a9cbaf5df572f9eb73869545424"
+    },
     "1635472149448": {
       "events": {
         "0x8b150673121b01316e8e9f04c655dcb53717f3ea8192a7606efea46850852934": {
@@ -22145,10 +22241,28 @@
       "links": {},
       "address": "0x6c158716Abcf3d1A3B510FAc5c3e5Fd1a121e251",
       "transactionHash": "0x2d6e8e4d8dbd469b5d52233e87baa46c47b8e343643bea256e21919f46de8224"
+    },
+    "1637077984327": {
+      "events": {},
+      "links": {},
+      "address": "0x0355441e5c707375af2cb17b2c72d429f6bc70C4",
+      "transactionHash": "0x09fbd33b72b3a314008dc1caef9cb03d82d7f2fbef45cb53629584a0566ffca2"
+    },
+    "1637080975419": {
+      "events": {},
+      "links": {},
+      "address": "0xF3a2879F277fD7a078F19371067A0cE02F0c6297",
+      "transactionHash": "0x4b2eb54fb68ba6cb0da7de7992ec72f7e105104e5595ed7f067a94eca086822d"
+    },
+    "1637257622445": {
+      "events": {},
+      "links": {},
+      "address": "0xdb595D5D0a31C1fED300b92B21eA1bb70c0715db",
+      "transactionHash": "0x51f834a53dd441bd4ff7a271ad119e8376af5ec04b6ca03979cdcbbec1d54917"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-11-15T17:21:57.375Z",
+  "updatedAt": "2021-11-22T15:54:29.175Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

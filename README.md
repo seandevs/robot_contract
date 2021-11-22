@@ -1,7 +1,9 @@
 ## Robot Smart Contract
 This is the smart contract for minting robots on the CELO (and ethereum network). The app uses Pinata for ipfs management <https://app.pinata.cloud/pinmanager>.
 
-### Common Commands in Truffle and Ganache
+### Depoying to Ganache and Alfjores testnet.
+
+#### For Ganache
 Start Ganache.
 ```
 $ ganache-cli --port 7545
@@ -10,6 +12,13 @@ $ ganache-cli --port 7545
 Start Truffle Console.
 ```
 $ truffle console --network development
+```
+
+#### For Alfjores
+
+Start Truffle Console.
+```
+$ truffle console --network alfajores
 ```
 
 Deploy contracts.
@@ -29,7 +38,7 @@ $ robot = await Robot.deployed()
 
 Mint a Token in Truffle.
 ```
-$ robot.mint(1, {from:accounts[1], value: 100000000000000000, gas: 4712388})
+$ robot.mint(1, {from:accounts[0], value: 10000000000000000000, gas: 4712388})
 ```
 
 Show the ID of the first token minted from above.
