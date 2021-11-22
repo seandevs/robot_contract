@@ -13,7 +13,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     using SafeMath for uint256;
 
-    // uint256 public _price = 8 * 10**16; // .08 eth
     uint256 public ROBOT_PRICE = 1 * 10**18;
 
     string private _baseTokenURI;
