@@ -38,7 +38,7 @@ $ robot = await Robot.deployed()
 
 Mint a Token in Truffle.
 ```
-$ robot.mint(1, {from:accounts[1], value: 100000000000000000, gas: 4712388})
+$ robot.mint(1, {from:accounts[0], value: 10000000000000000000, gas: 4712388})
 ```
 
 Show the ID of the first token minted from above.
