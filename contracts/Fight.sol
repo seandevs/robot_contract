@@ -77,6 +77,7 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
 
     function withdrawRake(address token) public payable onlyOwner {
         require(token == _Celo || token == _cUSD, "token is not celo or cUSD");
+        _rake = 0;
         require(IERC20(token).transfer(_wallet, _rake), "Withdrawing cUSD failed.");
     }
 }
