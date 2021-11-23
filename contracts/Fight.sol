@@ -11,6 +11,8 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
 
     using SafeMath for uint256;
 
+    uint256 public ANTE_PRICE = 10 * 10**18;
+
     address Celo = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
     address cUSD = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
@@ -46,6 +48,7 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
         address fighter2 = fights[fightId].fighter2;
         require(!fights[fightId].isPaidOut, "Fight already paid out");
         require(fighter1 == msg.sender || fighter2 == msg.sender, "You are not one of the fighters");
+        require(ANTE_PRICE == msg.value, "You need to ante the correct amount");
         fights[fightId].deposit.add(msg.value);
         emit Ante(msg.sender, msg.value);
     }
