@@ -43,7 +43,7 @@ $ robot.mint(1, {from:accounts[0], value: 10000000000000000000, gas: 4712388})
 
 Show the ID of the first token minted from above.
 ```
-$ robot.walletOfOwner(accounts[1]).then(function(bn) { thisToken = bn})
+$ robot.walletOfOwner(accounts[0]).then(function(bn) { thisToken = bn})
 $ thisToken[0].words[0]
 ```
 
@@ -129,4 +129,12 @@ $ bm.setAccessoryPrice(1, 3, {from:accounts[0], gas: 4712388})
 $ Get get accessory by ID
 ```
 $ bm.accessories(1)
+```
+
+### Fight Contract
+This is the contract for setting up a fight and allowing users to bet on it.
+
+Instantiate contract in the console.
+```
+$ fight = await Fight.deployed()
 ```
