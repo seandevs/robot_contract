@@ -11,7 +11,6 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
 
     using SafeMath for uint256;
 
-
     address Celo = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
     address cUSD = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
