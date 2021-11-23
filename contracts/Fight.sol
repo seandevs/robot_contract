@@ -53,7 +53,7 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
     function withdraw(uint256 fightId, address token) public {
         require(!fights[fightId].isPaidOut, "Fight already paid out");
         require(token == Celo || token == cUSD, "token is not celo or cUSD");
-        require(fights[fightId].deposit >= 0, "There is no balance for this fight");
+        require(fights[fightId].deposit > 0, "There is no balance for this fight");
         require(fights[fightId].winner == msg.sender , "You are not with winner of the fight");
         fights[fightId].isPaidOut = true;
         require(IERC20(token).transfer(msg.sender, fights[fightId].deposit), "Withdrawing cUSD failed.");
