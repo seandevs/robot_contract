@@ -13,8 +13,14 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
 
     uint256 public ANTE_PRICE = 10 * 10**18;
 
-    address Celo = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
-    address cUSD = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
+    address _Celo = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
+    address _cUSD = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
+
+    // Address where funds are collected
+    address payable private _wallet;
+
+    uint256 private _rake;
+    uint256 private RAKE_AMOUNT = 1 * 10**18;
 
     struct FightInfo {
         address fighter1;
@@ -29,6 +35,11 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
     event Withdrawal(address indexed to, uint256 amount);
     event Winner(address indexed winner);
     event Ante(address indexed from, uint256 amount);
+
+    constructor(address payable wallet) {
+        require(wallet != address(0), "wallet is the zero address");
+        _wallet = wallet;
+    }
 
     function createFight(uint256 fightId, address fighter1, address fighter2) public whenNotPaused onlyOwner {
         fights[fightId].fighter1 = fighter1;
@@ -49,17 +60,22 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
         require(!fights[fightId].isPaidOut, "Fight already paid out");
         require(fighter1 == msg.sender || fighter2 == msg.sender, "You are not one of the fighters");
         require(ANTE_PRICE == msg.value, "You need to ante the correct amount");
-        fights[fightId].deposit.add(msg.value);
+        fights[fightId].deposit.add(msg.value).sub(RAKE_AMOUNT);
+        _rake.add(RAKE_AMOUNT);
         emit Ante(msg.sender, msg.value);
     }
 
     function withdraw(uint256 fightId, address token) public {
         require(!fights[fightId].isPaidOut, "Fight already paid out");
-        require(token == Celo || token == cUSD, "token is not celo or cUSD");
+        require(token == _Celo || token == _cUSD, "token is not celo or cUSD");
         require(fights[fightId].deposit > 0, "There is no balance for this fight");
         require(fights[fightId].winner == msg.sender , "You are not with winner of the fight");
         fights[fightId].isPaidOut = true;
         require(IERC20(token).transfer(msg.sender, fights[fightId].deposit), "Withdrawing cUSD failed.");
         emit Withdrawal(msg.sender, fights[fightId].deposit);
+    }
+
+    function withdrawAll() public payable onlyOwner {
+        require(_wallet.send(_rake));
     }
 }

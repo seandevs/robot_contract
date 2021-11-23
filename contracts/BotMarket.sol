@@ -32,8 +32,8 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
 
 
     constructor (address payable wallet, IERC1155 accessory) {
-        require(wallet != address(0), "BotMarket: wallet is the zero address");
-        require(address(accessory) != address(0), "BotMarket: accessory is the zero address");
+        require(wallet != address(0), "wallet is the zero address");
+        require(address(accessory) != address(0), "accessory is the zero address");
 
         _wallet = wallet;
         _accessory = accessory;
