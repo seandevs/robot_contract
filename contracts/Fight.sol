@@ -19,6 +19,7 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
         address fighter2;
         address winner;
         uint256 deposit;
+        bool isPaidOut;
     }
 
     mapping(uint256 => FightInfo) public fights;
@@ -43,16 +44,18 @@ contract Fight is ReentrancyGuard, Pausable, Ownable {
     function ante(uint256 fightId) public whenNotPaused payable {
         address fighter1 = fights[fightId].fighter1;
         address fighter2 = fights[fightId].fighter2;
+        require(!fights[fightId].isPaidOut, "Fight already paid out");
         require(fighter1 == msg.sender || fighter2 == msg.sender, "You are not one of the fighters");
-        fights[fightId].deposit += msg.value;
+        fights[fightId].deposit.add(msg.value);
         emit Ante(msg.sender, msg.value);
     }
 
     function withdraw(uint256 fightId, address token) public {
+        require(!fights[fightId].isPaidOut, "Fight already paid out");
         require(token == Celo || token == cUSD, "token is not celo or cUSD");
         require(fights[fightId].deposit >= 0, "There is no balance for this fight");
         require(fights[fightId].winner == msg.sender , "You are not with winner of the fight");
-
+        fights[fightId].isPaidOut = true;
         require(IERC20(token).transfer(msg.sender, fights[fightId].deposit), "Withdrawing cUSD failed.");
         emit Withdrawal(msg.sender, fights[fightId].deposit);
     }
