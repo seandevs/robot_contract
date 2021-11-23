@@ -54,7 +54,7 @@ contract BotMarket is Context, ReentrancyGuard, ERC1155Holder, Pausable, Ownable
         return _wallet;
     }
 
-    function purchaseAccessory(address beneficiary, uint256 clazz) public nonReentrant whenNotPaused nonReentrant payable {
+    function purchaseAccessory(address beneficiary, uint256 clazz) public whenNotPaused nonReentrant payable {
         uint256 price = accessories[clazz].price;
         uint256 payment = msg.value;
         bool isForSale = accessories[clazz].isForSale;
