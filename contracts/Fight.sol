@@ -1,4 +1,4 @@
-// contracts/Market.sol
+// contracts/Fight.sol
 // SPDX-License-Identifier: MIT OR Apache-2.0
 pragma solidity ^0.8.2;
 
