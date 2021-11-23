@@ -21,7 +21,7 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
     address payable private _wallet;
 
     string[] private robotName = ["Robot1", "Robot2", "Robot3", "Robot4"];
-    string[] private robotType = ["Tank", "Speedy", "Defender", "Retired"];
+    string[] private robotType = ["Tank", "Speedy", "Defender", "Attacker"];
     uint256[] private strength = [20, 10, 10, 20];
     uint256[] private agility = [10, 20, 10, 20];
     uint256[] private ai = [10, 20, 20, 10];
