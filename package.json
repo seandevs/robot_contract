@@ -1,7 +1,8 @@
 {
   "devDependencies": {
     "@celo/ganache-cli": "^6.6.1",
-    "@openzeppelin/contracts": "^4.3.2"
+    "@openzeppelin/contracts": "^4.3.2",
+    "bignumber": "^1.1.0"
   },
   "dependencies": {
     "@celo/contractkit": "^1.3.3",

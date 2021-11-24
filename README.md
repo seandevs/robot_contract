@@ -59,7 +59,7 @@ This is the ERC1155 contract to mint Robot accessories as FTs.
 
 Instantiate contract in console.
 ```
-$ acc = await Robot.deployed()
+$ acc = await Accessory.deployed()
 ```
 
 Mint a Token in Truffle.
@@ -116,14 +116,14 @@ List an accessory for sale.
 $ bm.listAccessory(1, 1, {from:accounts[0], gas: 4712388})
 ```
 
-$ Purchase an accessory.
-```
-$ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388})
-```
-
 $ Set (or change) accessory price.
 ```
 $ bm.setAccessoryPrice(1, 3, {from:accounts[0], gas: 4712388})
+```
+
+$ Purchase an accessory.
+```
+$ bm.purchaseAccessory(accounts[1], 1, {from:accounts[1], value: 1, gas: 4712388})
 ```
 
 $ Get get accessory by ID
