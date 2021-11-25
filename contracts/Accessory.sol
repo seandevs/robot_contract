@@ -8,10 +8,10 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 
 contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
-    uint256 public constant CLASS_BUZZSAW = 1;
-    uint256 public constant CLASS_SWORD = 2;
-    uint256 public constant CLASS_SHIELD = 3;
-    uint256 public constant CLASS_AI_CHIP = 4;
+    uint256 public constant CLASS_BUZZSAW = 0;
+    uint256 public constant CLASS_SWORD = 1;
+    uint256 public constant CLASS_SHIELD = 2;
+    uint256 public constant CLASS_AI_CHIP = 3;
 
 
     constructor(uint256[] memory _clazzes, uint256[] memory _amounts, string memory uri) ERC1155("") {
@@ -32,7 +32,7 @@ contract Accessory is ERC1155, Ownable, Pausable, ERC1155Burnable {
     }
 
     function mintAccessory(uint256 _clazz, bytes memory _data) public whenNotPaused onlyOwner {
-        require(_clazz <= 4, "Accessory does not exist.");
+        require(_clazz < 4, "Accessory does not exist.");
         _mint(msg.sender, _clazz, 1, _data);
     }
 
