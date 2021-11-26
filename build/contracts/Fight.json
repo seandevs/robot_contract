@@ -18482,8 +18482,8 @@
         }
       },
       "links": {},
-      "address": "0xb71DE76675263Cfa6a36B024b6Dbe463dE9daA20",
-      "transactionHash": "0x3022c677dcc60ee20844e4e70b320dde87ff85a04a2245391833458c35407f8a"
+      "address": "0xB67Ae2058066A51C7c7079e1463762c1A5091529",
+      "transactionHash": "0x599c58c578ee8420e081695b8e8db1ca49fb660389eb39b95f084cc5d6637837"
     },
     "1637638090454": {
       "events": {
@@ -18587,10 +18587,113 @@
       "links": {},
       "address": "0x635413fEC58B0b0F63e77Dc2996F6dbC795B1822",
       "transactionHash": "0xaad72c35b9be16d9664b4109b665e7708328488fa3593a2ec36b7de36df2c4ee"
+    },
+    "1637798810885": {
+      "events": {
+        "0x0b2f0aac459a59b2b4190c910f8458d1ff7fe0d91f512a43c21448ac2893e667": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Ante",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Paused",
+          "type": "event"
+        },
+        "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Unpaused",
+          "type": "event"
+        },
+        "0x745c90b656b4aafe296c8ca35aeacfe56cb96c90e1d320e5da643fff1051b6c0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "winner",
+              "type": "address"
+            }
+          ],
+          "name": "Winner",
+          "type": "event"
+        },
+        "0x7fcf532c15f0a6db0bd6d0e038bea71d30d808c7d98cb3bf7268a95bf5081b65": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Withdrawal",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xe3409692F98061B65Ae42549D9C0e2c0EFB96e92",
+      "transactionHash": "0xe97ee23fcebe8ecc118ab61f286ad14c99d28e5e02dbd0129631fec08d2d0e08"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-11-25T00:47:08.609Z",
+  "updatedAt": "2021-11-26T19:55:08.703Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
