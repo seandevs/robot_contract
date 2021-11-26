@@ -22241,10 +22241,106 @@
       "links": {},
       "address": "0xE547FE598148510fEf2A6811BC4718f8d94d60e9",
       "transactionHash": "0xd173d7dbe0b15b0d5a8bfc688c16a347f0c369fd0b29ea28f80e6ea5b3fb62ca"
+    },
+    "1637798810885": {
+      "events": {
+        "0x8b150673121b01316e8e9f04c655dcb53717f3ea8192a7606efea46850852934": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "clazz",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            }
+          ],
+          "name": "AccessoryListed",
+          "type": "event"
+        },
+        "0xe0cc08cd6445055fb96ba62706d6598dd171f8a45e41f20be587f05446c95829": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "purchaser",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "value",
+              "type": "uint256"
+            }
+          ],
+          "name": "AccessoryPurchased",
+          "type": "event"
+        },
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Paused",
+          "type": "event"
+        },
+        "0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "Unpaused",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x24bD4cF4387c51Efd26D92038757bC57fCbA922e",
+      "transactionHash": "0x69564389e1fba8d0e6886fd24b0e35ac436b61c5414cdadf281e0f32c7943b50"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-11-25T00:46:48.590Z",
+  "updatedAt": "2021-11-26T18:54:53.255Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",

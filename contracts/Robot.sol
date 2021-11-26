@@ -4,13 +4,13 @@ pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "./Whitelist.sol";
 
-contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
-
+contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelist {
     using SafeMath for uint256;
 
     uint256 public ROBOT_PRICE = 5 * 10**18;
@@ -28,6 +28,8 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
     uint256[] private defense = [20, 10, 20, 10];
 
     mapping(uint256 => RobotAttributes) public robots;
+
+    string[] private robotURIs = ["0.json", "1.json", "2.json", "3.json"];
 
     enum State {
         Fighter, // 0
@@ -81,6 +83,20 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
+    // The following functions are overrides required by Solidity.
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
+
    // The following function override required by Solidity.
     function supportsInterface(bytes4 interfaceId)
         public
@@ -117,9 +133,11 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
         );
 
         uint256 totalSupply = totalSupply();
-        uint256 index = totalSupply + 1;
-        _createRobot(index, botType);
-        _safeMint(msg.sender, index);
+        uint256 tokenId = totalSupply + 1;
+        _createRobot(tokenId, botType);
+        _safeMint(msg.sender, tokenId);
+        string memory robotURI = robotURIs[botType];
+        _setTokenURI(tokenId, robotURI);
     }
 
     function updateRobotsRecords(uint256 winningRobotIndex, uint256 losingRobotIndex) public whenNotPaused onlyWhitelisted {
@@ -161,14 +179,6 @@ contract Robot is ERC721, ERC721Enumerable, Pausable, Whitelist {
 
     function setRobotAsRetired(uint256 robotIndex) public whenNotPaused onlyOwner {
         robots[robotIndex].state = State.Retired;
-    }
-
-    function getRobotRecord(uint256 robotIndex) public view returns(uint256, uint256) {
-        return(robots[robotIndex].wins, robots[robotIndex].losses);
-    }
-
-    function getRobotState(uint256 robotIndex) public view returns(State) {
-        return robots[robotIndex].state;
     }
 
     function walletOfOwner(address _owner)
