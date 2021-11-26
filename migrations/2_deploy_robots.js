@@ -7,8 +7,8 @@ module.exports = async function(deployer) {
     let _addr = await web3.eth.getAccounts();
     let _clazzes = [1,2,3,4];
     let _amounts = [100,100,100,100];
-    await deployer.deploy(Robot, "https://gateway.pinata.cloud/ipfs/QmSQaVkcT5njP3aJEyxLL7qPo6bwCQPCfB3Rbz2di48W6M/api/item", _addr[0]);
-    await deployer.deploy(Accessory, _clazzes, _amounts, "https://gateway.pinata.cloud/ipfs/Qmf8pKSC5mV6nTVSR3shJQp9e7CgVrNqKG98ZCKuMmPBPm/metadata/api/item/{id}.json");
+    await deployer.deploy(Robot, "https://gateway.pinata.cloud/ipfs/QmSQaVkcT5njP3aJEyxLL7qPo6bwCQPCfB3Rbz2di48W6M/api/item/", _addr[0]);
+    await deployer.deploy(Accessory, _clazzes, _amounts, "https://gateway.pinata.cloud/ipfs/QmZ4wueuLUFHMZtF65BBepB6Htz2ogqrupDK6XUomXMZx7/api/item/{id}.json");
     await deployer.deploy(BotMarket, _addr[0], Accessory.address);
     let _accessory = await Accessory.deployed();
     await _accessory.safeBatchTransferFrom(_addr[0], BotMarket.address, _clazzes, _amounts, "0x00");

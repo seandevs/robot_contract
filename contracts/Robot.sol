@@ -41,7 +41,6 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
 
     struct RobotAttributes {
         uint256 robotIndex;
-        string imageURI;
         uint256 wins;
         uint256 losses;
         State state;
@@ -107,20 +106,19 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
         return super.supportsInterface(interfaceId);
     }
 
-    function _createRobot(uint256 index, uint256 typeIndex) internal {
+    function _createRobot(uint256 index, uint256 botType) internal {
         robots[index] = RobotAttributes({
             robotIndex: index,
-            imageURI: " ",
             wins: 0,
             losses: 0,
             state: defaultState,
-            robotName: robotName[typeIndex],
-            robotType: robotType[typeIndex],
+            robotName: robotName[botType],
+            robotType: robotType[botType],
             health: 1000,
-            strength: strength[typeIndex],
-            agility: agility[typeIndex],
-            ai: ai[typeIndex],
-            defense: defense[typeIndex]
+            strength: strength[botType],
+            agility: agility[botType],
+            ai: ai[botType],
+            defense: defense[botType]
         });
     }
 
