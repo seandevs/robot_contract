@@ -17,6 +17,6 @@ module.exports = async function(deployer) {
     const ACCESSORY_PRICE = new BigNumber(1 * 10**18);
 
     for (let i = 0; i < 4; i++) {
-        await _botMarket.listAccessory(i, ACCESSORY_PRICE, {from:_addr[0]})
+        await _botMarket.listAccessory(_clazzes[i], ACCESSORY_PRICE, {from:_addr[0]})
     }
 }
