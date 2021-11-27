@@ -1,5 +1,6 @@
 // contracts/Robot.sol
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -113,7 +114,7 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
             state: defaultState,
             robotName: robotName,
             robotType: robotType[botType],
-            health: 1000,
+            health: 300,
             strength: strength[botType],
             agility: agility[botType],
             ai: ai[botType],
@@ -137,9 +138,12 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
         _setTokenURI(tokenId, robotURI);
     }
 
-    function updateRobotsRecords(uint256 winningRobotIndex, uint256 losingRobotIndex) public whenNotPaused onlyWhitelisted {
-        robots[winningRobotIndex].wins += 1;
-        robots[losingRobotIndex].losses += 1;
+    function updateRobotWinRecord(uint256 robotIndex) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].wins += 1;
+    }
+
+    function updateRobotLossRecord(uint256 robotIndex) public whenNotPaused onlyWhitelisted {
+        robots[robotIndex].losses += 1;
     }
 
     function updateRobotName(uint256 robotIndex, string memory value) public whenNotPaused onlyWhitelisted {
