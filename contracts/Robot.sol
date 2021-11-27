@@ -20,7 +20,6 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
     // Address where funds are collected
     address payable private _wallet;
 
-    string[] private robotName = ["Robot1", "Robot2", "Robot3", "Robot4"];
     string[] private robotType = ["Tank", "Speedy", "Defender", "Attacker"];
     uint256[] private strength = [20, 10, 10, 20];
     uint256[] private agility = [10, 20, 10, 20];
@@ -106,13 +105,13 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
         return super.supportsInterface(interfaceId);
     }
 
-    function _createRobot(uint256 index, uint256 botType) internal {
+    function _createRobot(uint256 index, uint256 botType, string memory robotName) internal {
         robots[index] = RobotAttributes({
             robotIndex: index,
             wins: 0,
             losses: 0,
             state: defaultState,
-            robotName: robotName[botType],
+            robotName: robotName,
             robotType: robotType[botType],
             health: 1000,
             strength: strength[botType],
@@ -123,7 +122,7 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
     }
 
     // Count is how many they want to mint
-    function mint(uint256 botType) public whenNotPaused payable {
+    function mint(uint256 botType, string memory robotName) public whenNotPaused payable {
         require(botType < 4, "There is no robot of that type");
         require(
             msg.value >= ROBOT_PRICE || owner() == _msgSender(),
@@ -132,7 +131,7 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
 
         uint256 totalSupply = totalSupply();
         uint256 tokenId = totalSupply + 1;
-        _createRobot(tokenId, botType);
+        _createRobot(tokenId, botType, robotName);
         _safeMint(msg.sender, tokenId);
         string memory robotURI = robotURIs[botType];
         _setTokenURI(tokenId, robotURI);
