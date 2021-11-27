@@ -151,23 +151,23 @@ contract Robot is ERC721, ERC721URIStorage, ERC721Enumerable, Pausable, Whitelis
     }
 
     function updateRobotHealth(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
-        robots[robotIndex].health = value;
+        robots[robotIndex].health += value;
     }
 
     function updateRobotStrength(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
-        robots[robotIndex].strength = value;
+        robots[robotIndex].strength += value;
     }
 
     function updateRobotAgility(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
-        robots[robotIndex].agility = value;
+        robots[robotIndex].agility += value;
     }
 
     function updateRobotAi(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
-        robots[robotIndex].ai = value;
+        robots[robotIndex].ai += value;
     }
 
     function updateRobotDefense(uint256 robotIndex, uint256 value) public whenNotPaused onlyWhitelisted {
-        robots[robotIndex].defense = value;
+        robots[robotIndex].defense += value;
     }
 
     function setRobotAsFighter(uint256 robotIndex) public whenNotPaused onlyOwner {
