@@ -29,7 +29,7 @@ $ truffle migrate --reset
 #### Robot Contract
 <https://docs.openzeppelin.com/contracts/4.x/api/token/erc721>  
 
-This is the ERC721 contract to mint Robot NFTs.  
+This is the ERC721 contract to mint Robot NFTs. Below are some example functions.  
 
 Instantiate contract in console.
 ```
@@ -55,7 +55,7 @@ $ robot.tokenURI(0)
 #### Accessory Contract
 <https://docs.openzeppelin.com/contracts/4.x/api/token/erc1155>  
 
-This is the ERC1155 contract to mint Robot accessories as FTs.  
+This is the ERC1155 contract to mint Robot accessories as FTs. Below are some example functions.   
 
 Instantiate contract in console.
 ```
@@ -80,7 +80,7 @@ $ acc.getWalletAccessories(accounts[1], [0,1,2,3])
 #### BotCash Contract
 <https://docs.openzeppelin.com/contracts/4.x/api/token/erc20>  
 
-This is the ERC20 contract to mint BotCash tokens.
+This is the ERC20 contract to mint BotCash tokens. Below are some example functions.  
 
 Instantiate contract in console.
 ```
@@ -103,8 +103,7 @@ $ bch.balanceOf(accounts[0])
 ```
 
 ### BotMarket Contract
-This is the contract for listing ERC1155 accessories to be purchased by users.  
-
+This is the contract for listing ERC1155 accessories to be purchased by users. Below are some example functions.  
 
 Instantiate contract in the console.
 ```
@@ -132,7 +131,7 @@ $ bm.accessories(1)
 ```
 
 ### Fight Contract
-This is the contract for setting up a fight and allowing users to bet on it.
+This is the contract for setting up a fight and allowing users to bet on it. Below are some example functions.  
 
 Instantiate contract in the console.
 ```
